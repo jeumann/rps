@@ -4,6 +4,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static com.ebay.rps.GameResult.*;
 
 public class RockPaperScissorTest {
 
@@ -12,19 +13,19 @@ public class RockPaperScissorTest {
 	@Test(dataProvider = "Draw")
 	public void checkDraws(Gesture gesture) {
 		GameResult gameResult = game.playRound(gesture, gesture);
-		assertThat(gameResult, is(GameResult.DRAW));
+		assertThat(gameResult, is(DRAW));
 	}
 
 	@Test(dataProvider = "Player1Wins")
 	public void playerOneWins(Gesture gesturePlayer1, Gesture gesturePlayer2) {
 		GameResult gameResult = game.playRound(gesturePlayer1, gesturePlayer2);
-		assertThat(gameResult, is(GameResult.PLAYER1_WINS));
+		assertThat(gameResult, is(PLAYER1_WINS));
 	}
 
 	@Test(dataProvider = "Player2Wins")
 	public void playerTwoWins(Gesture gesturePlayer1, Gesture gesturePlayer2) {
 		GameResult gameResult = game.playRound(gesturePlayer1, gesturePlayer2);
-		assertThat(gameResult, is(GameResult.PLAYER2_WINS));
+		assertThat(gameResult, is(PLAYER2_WINS));
 	}
 
 	@Test(dataProvider = "nullInputValues", expectedExceptions=RuntimeException.class)
