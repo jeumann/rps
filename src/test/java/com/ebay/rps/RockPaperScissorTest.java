@@ -15,7 +15,7 @@ public class RockPaperScissorTest {
 				{ Gesture.PAPER }, { Gesture.ROCK }, { Gesture.SCISSORS },
 				{ Gesture.SPONGE }, { Gesture.WATER } };
 	}
-
+	// TODO: Need to add the other combinations
 	@DataProvider(name = "Player1Wins")
 	public Object[][] createDataForPlayer1Wins() {
 		return new Object[][] { { Gesture.ROCK, Gesture.FIRE },
@@ -29,7 +29,7 @@ public class RockPaperScissorTest {
 				{ Gesture.FIRE, Gesture.PAPER }
 		};
 	}
-
+	// TODO: Need to add the other combinations
 	@DataProvider(name = "Player2Wins")
 	public Object[][] createDataForPlayer2Wins() {
 		return new Object[][] {
