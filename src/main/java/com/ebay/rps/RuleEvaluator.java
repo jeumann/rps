@@ -1,27 +1,23 @@
 package com.ebay.rps;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import static java.util.Arrays.asList;
 
 public class RuleEvaluator {
-	Map<Gesture, Gesture[]> rulesMap = new HashMap<Gesture, Gesture[]>();
+	Map<Gesture, List<Gesture>> rulesMap = new HashMap<Gesture, List<Gesture>>();
 
 	public RuleEvaluator() {
-		// Map stores a gesture and an array of the gestures that are beaten by the gesture
-		rulesMap.put(Gesture.ROCK, new Gesture[] { Gesture.SCISSORS,
-				Gesture.SPONGE, Gesture.FIRE });
-		rulesMap.put(Gesture.PAPER, new Gesture[] { Gesture.WATER,
-				Gesture.ROCK, Gesture.AIR });
-		rulesMap.put(Gesture.SCISSORS, new Gesture[] { Gesture.PAPER,
-				Gesture.SPONGE, Gesture.AIR });
-		rulesMap.put(Gesture.WATER, new Gesture[] { Gesture.SCISSORS,
-				Gesture.ROCK, Gesture.FIRE });
-		rulesMap.put(Gesture.SPONGE, new Gesture[] { Gesture.WATER,
-				Gesture.PAPER, Gesture.AIR });
-		rulesMap.put(Gesture.FIRE, new Gesture[] { Gesture.SPONGE,
-				Gesture.PAPER, Gesture.SCISSORS });
-		rulesMap.put(Gesture.AIR, new Gesture[] { Gesture.WATER, Gesture.ROCK,
-				Gesture.FIRE });
+		// Map stores a gesture and a list of the gestures that the gesture beats
+		rulesMap.put(Gesture.ROCK, asList(Gesture.SCISSORS, Gesture.SPONGE, Gesture.FIRE));
+		rulesMap.put(Gesture.ROCK, asList(Gesture.SCISSORS,Gesture.SPONGE, Gesture.FIRE));
+		rulesMap.put(Gesture.PAPER, asList(Gesture.WATER, Gesture.ROCK, Gesture.AIR));
+		rulesMap.put(Gesture.SCISSORS, asList(Gesture.PAPER, Gesture.SPONGE, Gesture.AIR));
+		rulesMap.put(Gesture.WATER, asList(Gesture.SCISSORS, Gesture.ROCK, Gesture.FIRE));
+		rulesMap.put(Gesture.SPONGE, asList(Gesture.WATER, Gesture.PAPER, Gesture.AIR));
+		rulesMap.put(Gesture.FIRE, asList(Gesture.SPONGE, Gesture.PAPER, Gesture.SCISSORS));
+		rulesMap.put(Gesture.AIR, asList(Gesture.WATER, Gesture.ROCK, Gesture.FIRE));
 	}
 
 	public GameResult determineGameResult(Gesture gestureFromPlayer1,
@@ -31,7 +27,7 @@ public class RuleEvaluator {
 			return GameResult.DRAW;
 		}
 
-		Gesture[] loosingGestures = rulesMap.get(gestureFromPlayer1);
+		List<Gesture> loosingGestures = rulesMap.get(gestureFromPlayer1);
 
 		if (loosingGestures != null) {
 			for (Gesture loosingGesture : loosingGestures) {
