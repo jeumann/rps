@@ -1,10 +1,14 @@
 package com.ebay.rps;
 
+import java.util.List;
+
 public class Game {
 
 	RuleEvaluator ruleEvaluator;
+	List<Gesture> allowedGestures;
 
-	public Game(RuleEvaluator ruleEvaluator) {
+	public Game(List<Gesture> allowedGestures, RuleEvaluator ruleEvaluator) {
+		this.allowedGestures = allowedGestures;
 		this.ruleEvaluator = ruleEvaluator;
 	}
 
@@ -12,6 +16,12 @@ public class Game {
 		if (gesturePlayerOne == null || gesturePlayerTwo == null) {
 			throw new RuntimeException("Invalid input values");
 		}
-		return ruleEvaluator.determineGameResult(gesturePlayerOne, gesturePlayerTwo);
+
+		if (allowedGestures.contains(gesturePlayerOne) && allowedGestures.contains(gesturePlayerTwo)) {
+			return ruleEvaluator.determineGameResult(gesturePlayerOne, gesturePlayerTwo);
+		} else {
+			throw new RuntimeException("Gesture not allowed");
+		}
+
 	}
 }
