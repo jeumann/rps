@@ -1,13 +1,13 @@
 package com.ebay.rps;
 
-import java.util.List;
+import java.util.Set;
 
 public class Game {
 
 	RuleEvaluator ruleEvaluator;
-	List<Gesture> allowedGestures;
+	Set<Gesture> allowedGestures;
 
-	public Game(List<Gesture> allowedGestures, RuleEvaluator ruleEvaluator) {
+	public Game(Set<Gesture> allowedGestures, RuleEvaluator ruleEvaluator) {
 		this.allowedGestures = allowedGestures;
 		this.ruleEvaluator = ruleEvaluator;
 	}

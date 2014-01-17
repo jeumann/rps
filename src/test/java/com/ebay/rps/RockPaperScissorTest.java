@@ -1,20 +1,14 @@
 package com.ebay.rps;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static com.ebay.rps.GameResult.*;
-import static java.util.Arrays.asList;
 
 public class RockPaperScissorTest {
 
-	Game game = new Game(createAllowedGestures(), new RuleEvaluator(createRulesMap()));
+	Game game = new Game(GameConfig.getRulesMap().keySet(), new RuleEvaluator(GameConfig.getRulesMap()));
 
 	@Test(dataProvider = "Draw")
 	public void checkDraws(Gesture gesture) {
@@ -95,29 +89,5 @@ public class RockPaperScissorTest {
 	@DataProvider(name = "nullInputValues")
 	public Object[][] createDataForInputValues() {
 		return new Object[][] { { Gesture.ROCK, null }, { null, Gesture.AIR } };
-	}
-	
-	private List<Gesture> createAllowedGestures() {
-		List<Gesture> allowedGestures = new ArrayList<Gesture>();
-		allowedGestures.add(Gesture.AIR);
-		allowedGestures.add(Gesture.SCISSORS);
-		allowedGestures.add(Gesture.FIRE);
-		allowedGestures.add(Gesture.PAPER);
-		allowedGestures.add(Gesture.ROCK);
-		allowedGestures.add(Gesture.SPONGE);
-		allowedGestures.add(Gesture.WATER);
-		return allowedGestures;
-	}
-	
-	private Map<Gesture, List<Gesture>> createRulesMap() {
-		Map<Gesture, List<Gesture>> rulesMap = new HashMap<Gesture, List<Gesture>>();
-		rulesMap.put(Gesture.ROCK, asList(Gesture.SCISSORS, Gesture.SPONGE, Gesture.FIRE));
-		rulesMap.put(Gesture.PAPER, asList(Gesture.WATER, Gesture.ROCK, Gesture.AIR));
-		rulesMap.put(Gesture.SCISSORS, asList(Gesture.PAPER, Gesture.SPONGE, Gesture.AIR));
-		rulesMap.put(Gesture.WATER, asList(Gesture.SCISSORS, Gesture.ROCK, Gesture.FIRE));
-		rulesMap.put(Gesture.SPONGE, asList(Gesture.WATER, Gesture.PAPER, Gesture.AIR));
-		rulesMap.put(Gesture.FIRE, asList(Gesture.SPONGE, Gesture.PAPER, Gesture.SCISSORS));
-		rulesMap.put(Gesture.AIR, asList(Gesture.WATER, Gesture.ROCK, Gesture.FIRE));
-		return rulesMap;
 	}
 }
