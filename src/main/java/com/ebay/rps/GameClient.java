@@ -16,7 +16,7 @@ public class GameClient {
 
     public static void main (String[] args) {
         for (int i=0; i<20; i++) {
-            Game game = new Game(GameConfig.getRulesMap().keySet(), new RuleEvaluator(GameConfig.getRulesMap()));
+            Game game = new Game(new RuleEvaluator(GameConfig.getRulesMap()));
             Gesture player1 = ComputerPlayer.randomGesture();
             Gesture player2 = ComputerPlayer.randomGesture();
             GameResult result = game.playRound(player1, player2);

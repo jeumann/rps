@@ -5,10 +5,8 @@ import java.util.Set;
 public class Game {
 
 	RuleEvaluator ruleEvaluator;
-	Set<Gesture> allowedGestures;
 
-	public Game(Set<Gesture> allowedGestures, RuleEvaluator ruleEvaluator) {
-		this.allowedGestures = allowedGestures;
+	public Game (RuleEvaluator ruleEvaluator) {
 		this.ruleEvaluator = ruleEvaluator;
 	}
 
@@ -17,11 +15,15 @@ public class Game {
 			throw new RuntimeException("Invalid input values");
 		}
 
-		if (allowedGestures.contains(gesturePlayerOne) && allowedGestures.contains(gesturePlayerTwo)) {
+		if (isGestureValid(gesturePlayerOne) && isGestureValid(gesturePlayerTwo)) {
 			return ruleEvaluator.determineGameResult(gesturePlayerOne, gesturePlayerTwo);
 		} else {
 			throw new RuntimeException("Gesture not allowed");
 		}
 
 	}
+
+    private boolean isGestureValid(Gesture gesturePlayerOne) {
+        return GameConfig.getRulesMap().keySet().contains(gesturePlayerOne);
+    }
 }
